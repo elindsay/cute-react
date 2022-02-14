@@ -1,7 +1,23 @@
+$theme-colors: (
+  "primary": #333333
+);
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+body {
+  font-family: Chivo, sans-serif;
+}
+
 .Logo-title {
   display: inline;
 }
+h4 {
+  text-align: left;
+}
 @media screen and (max-width: 750px) {
+  h4 {
+    text-align: center;
+  }
   .Navbar {
     text-align: center;
     display: block;
@@ -69,6 +85,9 @@
 .Hamburger {
   display: none;
 }
+.Sm-only {
+  display: none;
+}
 @media screen and (max-width: 750px) {
   .Hamburger {
     display: inline;
@@ -76,5 +95,25 @@
   }
   .Lg-only {
     display: none;
+  }
+  .Sm-only {
+    display: block;
+  }
+}
+
+.designer {
+  position: relative;
+  width: 900px;
+  height: 900px;
+  .body {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  .eye {
+    position: absolute;
+  }
+  .mouth {
+    position: absolute;
   }
 }
