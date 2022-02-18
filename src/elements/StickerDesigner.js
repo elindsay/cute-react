@@ -1,30 +1,31 @@
-import React, { useState } from 'react'
+import api from '../api'
+import React, { useState, useEffect } from 'react'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
-import cat from './assets/component_images/bodies/cat-white.png';
-import dog from './assets/component_images/bodies/dog-white.png';
-import lion from './assets/component_images/bodies/lion-white.png';
-import bear from './assets/component_images/bodies/bear-white.png';
-import e1_l from './assets/component_images/eyes/eye1-left.png';
-import e1_r from './assets/component_images/eyes/eye1-right.png';
-import e2_l from './assets/component_images/eyes/eye2-left.png';
-import e2_r from './assets/component_images/eyes/eye2-right.png';
-import e3_l from './assets/component_images/eyes/eye3-left.png';
-import e3_r from './assets/component_images/eyes/eye3-right.png';
-import e4_l from './assets/component_images/eyes/eye4-left.png';
-import e4_r from './assets/component_images/eyes/eye4-right.png';
-import e5_l from './assets/component_images/eyes/eye5-left.png';
-import e5_r from './assets/component_images/eyes/eye5-right.png';
-import m1 from './assets/component_images/mouths/mouth1.png';
-import m2 from './assets/component_images/mouths/mouth2.png';
-import m3 from './assets/component_images/mouths/mouth3.png';
-import m4 from './assets/component_images/mouths/mouth4.png';
-import m5 from './assets/component_images/mouths/mouth5.png';
-import m6 from './assets/component_images/mouths/mouth6.png';
-import m7 from './assets/component_images/mouths/mouth7.png';
+import cat from '../assets/component_images/bodies/cat-white.png';
+import dog from '../assets/component_images/bodies/dog-white.png';
+import lion from '../assets/component_images/bodies/lion-white.png';
+import bear from '../assets/component_images/bodies/bear-white.png';
+import e1_l from '../assets/component_images/eyes/eye1-left.png';
+import e1_r from '../assets/component_images/eyes/eye1-right.png';
+import e2_l from '../assets/component_images/eyes/eye2-left.png';
+import e2_r from '../assets/component_images/eyes/eye2-right.png';
+import e3_l from '../assets/component_images/eyes/eye3-left.png';
+import e3_r from '../assets/component_images/eyes/eye3-right.png';
+import e4_l from '../assets/component_images/eyes/eye4-left.png';
+import e4_r from '../assets/component_images/eyes/eye4-right.png';
+import e5_l from '../assets/component_images/eyes/eye5-left.png';
+import e5_r from '../assets/component_images/eyes/eye5-right.png';
+import m1 from '../assets/component_images/mouths/mouth1.png';
+import m2 from '../assets/component_images/mouths/mouth2.png';
+import m3 from '../assets/component_images/mouths/mouth3.png';
+import m4 from '../assets/component_images/mouths/mouth4.png';
+import m5 from '../assets/component_images/mouths/mouth5.png';
+import m6 from '../assets/component_images/mouths/mouth6.png';
+import m7 from '../assets/component_images/mouths/mouth7.png';
 
 const bodies = [cat, dog, lion, bear]
 const bodypos = [
@@ -44,6 +45,13 @@ const StickerDesigner = () => {
   const [eyesIndex, setEyesIndex] = useState(0)
   const [mouthIndex, setMouthIndex] = useState(0)
   const [editType, setEditType] = useState("");
+
+  useEffect(() => {
+    api.getComponentImages()
+      .then(result => {
+        console.log(result)
+      })
+  });
 
   return(
     <div>
