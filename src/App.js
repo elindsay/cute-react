@@ -3,6 +3,7 @@ import './App.scss';
 import { Navbar, Nav, Row, Col } from 'react-bootstrap';
 import { useState } from 'react';
 import StickerDesigner from './elements/StickerDesigner';
+import SocketConnector from './elements/SocketConnector';
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -41,6 +42,9 @@ function App() {
           <Col sm={12} md={9}>
             <StickerDesigner />
           </Col>
+        </Row>
+        <Row>
+          <SocketConnector />
         </Row>
       </div>
     </div>
