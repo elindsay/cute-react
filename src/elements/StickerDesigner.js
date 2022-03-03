@@ -84,9 +84,9 @@ const StickerDesigner = () => {
         {bodies[bodyIndex].layers.map((layer_data, ix) => {
           return <img src={layer_data.signed_url}  className={ layer_data.layer >= 0 ? "body" : "body hidden"} key={"layer-"+layer_data.layer}/>
         })}
-        <img src={eyes[eyesIndex].layers[0].signed_url}  className="eye left" style={{left: bodies[bodyIndex]['eye_spacing'], top: bodies[bodyIndex]['eye_top']}}/>
-        <img src={eyes[eyesIndex].layers[1].signed_url}  className="eye right" style={{right: bodies[bodyIndex]['eye_spacing'], top: bodies[bodyIndex]['eye_top']}}/>
-        <img src={mouths[mouthIndex].signed_url}  className="mouth" style={{left: bodies[bodyIndex]['mouth_x'], top: bodies[bodyIndex]['mouth_y']}} />
+        <img src={eyes[eyesIndex].layers[0].signed_url}  className="eye left" style={{left: bodies[bodyIndex]['eye_offset'], top: bodies[bodyIndex]['eye_top']}}/>
+        <img src={eyes[eyesIndex].layers[1].signed_url}  className="eye right" style={{right: bodies[bodyIndex]['eye_offset'], top: bodies[bodyIndex]['eye_top']}}/>
+        <img src={mouths[mouthIndex].signed_url}  className="mouth" style={{left: bodies[bodyIndex]['mouth_offset'], top: bodies[bodyIndex]['mouth_top']}} />
       </div>
     </div>
   )

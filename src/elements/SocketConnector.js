@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import io from 'socket.io-client';
 
 const endPoint = process.env.REACT_APP_URL;
-const socket = io.connect(`${endPoint}`);
+const socket = io.connect(`${endPoint}`); // /test`);
 
 const SocketConnector = () => {
   const [messages, setMessages] = useState(["Hello And Welcome"]);
@@ -39,8 +39,8 @@ const SocketConnector = () => {
   return (
     <div>
       {messages.length > 0 &&
-        messages.map(msg => (
-          <div>
+        messages.map((msg, ix) => (
+          <div key={'message-'+ix}>
             <p>{msg}</p>
           </div>
         ))}
