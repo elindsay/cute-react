@@ -2,14 +2,23 @@ import React, { useState, useEffect } from 'react'
 import io from 'socket.io-client';
 
 const endPoint = process.env.REACT_APP_URL;
-const socket = io.connect(`${endPoint}`); // /test`);
+const socket = io.connect(`${endPoint}`);
 
 const SocketConnector = () => {
   const [messages, setMessages] = useState(["Hello And Welcome"]);
   const [message, setMessage] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+
+
 
   useEffect(() => {
+    //socket.emit('join', 'abcd');
+    console.log("setting up")
+    socket.on("connect", () => {
+      console.log(socket.id);
+    })
     getMessages();
+    getImages();
   }, [messages.length]);
 
   const getMessages = () => {
@@ -17,9 +26,17 @@ const SocketConnector = () => {
       //   let allMessages = messages;
       //   allMessages.push(msg);
       //   setMessages(allMessages);
+      console.log("getting message")
       setMessages([...messages, msg]);
     });
   };
+
+  const getImages = () => {
+    socket.on("image", imgMsg => {
+      console.log("getting image")
+      setImgUrl(imgMsg)
+    });
+  }
 
   // On Change
   const onChange = e => {
@@ -46,6 +63,7 @@ const SocketConnector = () => {
         ))}
       <input value={message} name="message" onChange={e => onChange(e)} />
       <button onClick={() => onClick()}>Send Message</button>
+      <img src={imgUrl} />
     </div>
   );
 };

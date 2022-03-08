@@ -1,7 +1,6 @@
 import api from '../api'
-import React, { useState, useEffect } from 'react'
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
-import ToggleButton from 'react-bootstrap/ToggleButton'
+import React, { useState, useEffect, useCallback } from 'react'
+import { Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
@@ -13,6 +12,10 @@ const StickerDesigner = () => {
   const [mouthIndex, setMouthIndex] = useState(0)
   const [mouths, setMouths] = useState([{signed_url: ""}])
   const [editType, setEditType] = useState("");
+
+  const genImage = useCallback(() => {
+    api.composeImage()
+   }, []);
 
   useEffect(() => {
     api.getEyeComposites().then((result) => {
@@ -87,6 +90,9 @@ const StickerDesigner = () => {
         <img src={eyes[eyesIndex].layers[0].signed_url}  className="eye left" style={{left: bodies[bodyIndex]['eye_offset'], top: bodies[bodyIndex]['eye_top']}}/>
         <img src={eyes[eyesIndex].layers[1].signed_url}  className="eye right" style={{right: bodies[bodyIndex]['eye_offset'], top: bodies[bodyIndex]['eye_top']}}/>
         <img src={mouths[mouthIndex].signed_url}  className="mouth" style={{left: bodies[bodyIndex]['mouth_offset'], top: bodies[bodyIndex]['mouth_top']}} />
+      </div>
+      <div>
+        <Button onClick={ () => genImage() } >Generate Images</Button>
       </div>
     </div>
   )
