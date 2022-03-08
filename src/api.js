@@ -19,8 +19,7 @@ const api = {
       formData,
       { headers: { 'Content-Type': 'multipart/form-data' } }
     )
-    console.log(result)
-    return "hi"
+    return result
   }
 }
 

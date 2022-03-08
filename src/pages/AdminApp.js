@@ -1,35 +1,19 @@
 import api from '../api'
 import React, { useState, useEffect, useCallback } from 'react'
-import { Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
-import Table from 'react-bootstrap/Table'
-import Form from 'react-bootstrap/Form'
+import { ToggleButton, Table} from 'react-bootstrap'
+import AdminCompositeEditor from '../elements/AdminCompositeEditor'
 
 const fileTypes = ["PNG"];
 
 const AdminApp = () => {
   const [editType, setEditType] = useState("list")
   const [components, setComponents] = useState([])
-  const [selectedFile, setSelectedFile] = useState("test");
-  const [componentType, setComponentType] = useState("");
   
   useEffect(() => {
     api.getComponents().then((result) => {
       setComponents(result.data)
     })
   }, [components])
-
-  const setFile = (event) => {
-    event.preventDefault()
-		setSelectedFile(event.target.files[0]);
-	};
-
-  const submitComponent = useCallback((event) => {
-    event.preventDefault()
-    api.uploadComponent(selectedFile, componentType).then((result) => {
-      console.log(result)
-    })
-  });
-
 
   return(
     <div className="ContentContainer Admin">
@@ -66,22 +50,7 @@ const AdminApp = () => {
         </Table>
        }
       {editType == "upload" &&
-        <Form onSubmit={ (event) =>  submitComponent(event)}>
-          <Form.Group className="mb-3" controlId="type">
-            <Form.Label>Type</Form.Label>
-            <Form.Control 
-              type="text" 
-              value={componentType} 
-              onChange={(event) => setComponentType(event.target.value) } />
-          </Form.Group>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Default file input example</Form.Label>
-            <Form.Control type="file" onChange={(event) => setFile(event)} />
-          </Form.Group>
-          <Button type="submit">Save</Button>
-        </Form>
-         //image with name & run
-        //c_type
+          <AdminCompositeEditor />
       }
     </div>
   )
