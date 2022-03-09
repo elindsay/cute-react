@@ -32,6 +32,12 @@ const AdminCompositeEditor = () => {
     })
   });
 
+  const genImage = () => {
+    api.generateImage(components).then((result) => {
+      console.log(result)
+    })
+  }
+
   
   return(
     <div>
@@ -49,6 +55,7 @@ const AdminCompositeEditor = () => {
         </Form.Group>
         <Button type="submit">Save</Button>
       </Form>
+      <Button onClick={genImage}>Generate</Button>
       { components.map((component, ix) => {
         return(
           <div style={{position: 'inline'}} key={"pos-"+ix}>
