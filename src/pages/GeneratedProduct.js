@@ -16,7 +16,7 @@ const GeneratedProduct = () => {
       console.log("request run")
       setProduct(result.data)
     })
-  })
+  }, [])
 
   const display_price = (price_cents) => {
     return (price_cents/100).toLocaleString('en-US', {
