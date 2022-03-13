@@ -7,6 +7,7 @@ const api = {
   getBodyComposites: async () => await axios.get(baseUrl+'/body_composites'),
   getEyeComposites: async () => await axios.get(baseUrl+'/eye_composites'),
   getMouthComponentImages: async () => await axios.get(baseUrl+'/components?c_type=mouth'),
+  getGeneratedProduct: async (product_id) => await axios.get(baseUrl+'/generated_products/'+product_id),
   composeImage: async (body_id, eyes_id, mouth_id) => { 
     const formData = new FormData()
     console.log('body eyes mouth')

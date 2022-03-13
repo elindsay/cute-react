@@ -22,7 +22,6 @@ const StickerDesigner = () => {
    }
 
   useEffect(() => {
-    console.log("HI")
     api.getEyeComposites().then((result) => {
       setEyes(result.data)
     })

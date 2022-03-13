@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import io from 'socket.io-client';
+import { Row, Col } from 'react-bootstrap';
 
 const endPoint = process.env.REACT_APP_URL;
 const socket = io.connect(`${endPoint}`);
 
+
 const SocketConnector = () => {
-  const [messages, setMessages] = useState(["Hello And Welcome"]);
+  const [messages, setMessages] = useState([""]);
   const [message, setMessage] = useState("");
   const [imgUrl, setImgUrl] = useState("");
 
@@ -57,13 +59,15 @@ const SocketConnector = () => {
     <div>
       {messages.length > 0 &&
         messages.map((msg, ix) => (
-          <div key={'message-'+ix}>
+          <Row key={'message-'+ix}>
             <p>{msg}</p>
-          </div>
+          </Row>
         ))}
-      <input value={message} name="message" onChange={e => onChange(e)} />
-      <button onClick={() => onClick()}>Send Message</button>
-      <img src={imgUrl} />
+      <Row>
+        <Col sm={12} md={4} className="ProductPreview">
+          <img src={imgUrl} className="product_preview"/>
+        </Col>
+      </Row>
     </div>
   );
 };
