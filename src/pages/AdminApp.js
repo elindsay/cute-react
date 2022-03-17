@@ -1,7 +1,7 @@
 import api from '../api'
 import React, { useState, useEffect, useCallback } from 'react'
 import { ToggleButton, Table} from 'react-bootstrap'
-import AdminCompositeEditor from '../elements/AdminCompositeEditor'
+import AdminComponentEditor from '../elements/AdminComponentEditor'
 
 const fileTypes = ["PNG"];
 
@@ -13,7 +13,7 @@ const AdminApp = () => {
     api.getComponents().then((result) => {
       setComponents(result.data)
     })
-  }, [components])
+  }, [])
 
   return(
     <div className="ContentContainer Admin">
@@ -28,29 +28,29 @@ const AdminApp = () => {
          Switch to {editType == "upload" ? "list" : "upload"}
       </ToggleButton>
       {editType == "list" &&
-        <Table striped bordered hover>
+        <Table bordered>
           <thead>
             <tr>
               <th>id</th>
-              <th>Type</th>
-              <th>Image</th>
+              <th>Description</th>
+              <th>Components</th>
             </tr>
           </thead>
           <tbody>
             { components.map((component, ix) => {
-              return (<tr key={"row-"+ix}>
-                <td>{component.id}</td>
-                <td>{component.c_type}</td>
-                <td>
-                  <img src={component.signed_url} className="table-img"/>
-                </td>
-              </tr>)
+              return (
+                <tr key={"row-"+ix}>
+                  <td>{component.id}</td>
+                  <td>{component.description}</td>
+                  <td><img src={component.image_url} style={{width: '50px'}}/></td>
+                </tr>
+              )
             })}
           </tbody>
         </Table>
        }
       {editType == "upload" &&
-          <AdminCompositeEditor />
+          <AdminComponentEditor />
       }
     </div>
   )

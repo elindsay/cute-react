@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import io from 'socket.io-client';
 import { Row, Col } from 'react-bootstrap';
 
@@ -10,6 +11,7 @@ const SocketConnector = () => {
   const [messages, setMessages] = useState([""]);
   const [message, setMessage] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [productId, setProductId] = useState("");
 
 
 
@@ -21,7 +23,8 @@ const SocketConnector = () => {
     })
     getMessages();
     getImages();
-  }, [messages.length]);
+    getProductIds();
+  }, []);
 
   const getMessages = () => {
     socket.on("message", msg => {
@@ -37,6 +40,13 @@ const SocketConnector = () => {
     socket.on("image", imgMsg => {
       console.log("getting image")
       setImgUrl(imgMsg)
+    });
+  }
+
+  const getProductIds = () => {
+    socket.on("product_id", pdMsg => {
+      console.log("setting produt")
+      setProductId(pdMsg)
     });
   }
 
@@ -65,7 +75,9 @@ const SocketConnector = () => {
         ))}
       <Row>
         <Col sm={12} md={4} className="ProductPreview">
-          <img src={imgUrl} className="product_preview"/>
+          <Link to={"/products/"+productId} >
+            <img src={imgUrl} className="product_preview"/>
+          </Link>
         </Col>
       </Row>
     </div>
