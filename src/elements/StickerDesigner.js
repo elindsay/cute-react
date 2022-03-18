@@ -12,6 +12,7 @@ const getWindowDimensions = () => {
 const StickerDesigner = () => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
   const [designerScale, setDesignerScale] = useState(1);
+  const [designerLength, setDesignerLength] = useState(1000);
   const [frames, setFrames] = useState([{image_url: ""}])
   const [frameIndex, setFrameIndex] = useState(0)
   const [photos, setPhotos] = useState([{image_url: ""}])
@@ -20,6 +21,8 @@ const StickerDesigner = () => {
   const [photoPosition, setPhotoPosition] = useState([0, 200])
   const [photoScale, setPhotoScale] = useState(1)
   const inputFile = useRef(null) 
+  //TODO: find frame size dynamically in future
+  const frameSize = 1000
 
   const genImage = () => {
     api.createComposite(
@@ -31,11 +34,14 @@ const StickerDesigner = () => {
    }
 
   const setDesignerDimensions = (dimensions) => {
+    let size = 0;
     if(dimensions[0] < 768){
-      setDesignerScale( dimensions[0]/1000);
+      size = dimensions[0] - 20
     }else{
-      setDesignerScale((dimensions[0] - 220)/1000);
+      size = Math.min(dimensions[0] - 300, 850)
     }
+    setDesignerScale(size/frameSize);
+    setDesignerLength(size)
   }
 
   const handleResize = () => {
@@ -147,12 +153,20 @@ const StickerDesigner = () => {
       <Button onClick={() => genImage()} >
         Generate
       </Button>
-      <div className="designer" style={{position: 'relative', overflow: 'hidden'}}>
+      <div className="designer" 
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          width: designerLength,
+          height: designerLength
+        }}
+      >
         <div 
           className="content" 
           style={{
-            height: '100%',
             overflow: 'hidden',
+            width: frameSize+'px',
+            height: frameSize+'px',
             transformOrigin: 'top left',
             transform: 'scale('+designerScale+')', 
              
