@@ -10,8 +10,8 @@ const socket = io.connect(`${endPoint}`);
 const SocketConnector = () => {
   const [messages, setMessages] = useState([""]);
   const [message, setMessage] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
-  const [productId, setProductId] = useState("");
+  const [imgUrls, setImgUrls] = useState([])
+  const [productIds, setProductIds] = useState([])
 
 
 
@@ -38,15 +38,16 @@ const SocketConnector = () => {
 
   const getImages = () => {
     socket.on("image", imgMsg => {
-      console.log("getting image")
-      setImgUrl(imgMsg)
+      console.log("setting image")
+      console.log(imgUrls.length)
+      setImgUrls(imgUrls => [...imgUrls, imgMsg])
     });
   }
 
   const getProductIds = () => {
     socket.on("product_id", pdMsg => {
       console.log("setting produt")
-      setProductId(pdMsg)
+      setProductIds(productIds => [...productIds, pdMsg])
     });
   }
 
@@ -74,11 +75,13 @@ const SocketConnector = () => {
           </Row>
         ))}
       <Row>
-        <Col sm={12} md={4} className="ProductPreview">
-          <Link to={"/products/"+productId} >
-            <img src={imgUrl} className="product_preview"/>
-          </Link>
-        </Col>
+        { imgUrls.map((imgUrl, ix) => (
+          <Col sm={12} md={4} className="ProductPreview" key={"product-link-"+ix}>
+            <Link to={"/products/"+productIds[ix]} >
+              <img src={imgUrl} className="product_preview"/>
+            </Link>
+          </Col>
+        ))}
       </Row>
     </div>
   );

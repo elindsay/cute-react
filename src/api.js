@@ -24,6 +24,11 @@ const api = {
     formData.append("photo_position", position)
     formData.append("photo_scale", scale)
     await axios.post(baseUrl+'/composites', formData)
+  },
+  createOrder: async (product_id, frame, scale, position) => { 
+    const formData = new FormData()
+    formData.append("product_id", product_id)
+    await axios.post(baseUrl+'/orders', formData)
   }
 }
 

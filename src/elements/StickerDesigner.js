@@ -150,9 +150,6 @@ const StickerDesigner = () => {
           </div>
         )}
       </div>
-      <Button onClick={() => genImage()} >
-        Generate
-      </Button>
       <div className="designer" 
         style={{
           position: 'relative',
@@ -185,6 +182,9 @@ const StickerDesigner = () => {
           <img src={frames[frameIndex].image_url} style={{top: '0px', position: 'absolute'}}/>
         </div>
       </div>
+      <Button onClick={() => genImage()} >
+        Generate
+      </Button>
     </div>
   )
 }
