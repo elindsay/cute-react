@@ -1,4 +1,5 @@
 import api from '../api'
+import thumper from '../assets/thumper-transparent.gif';
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Button, Form, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,13 +10,13 @@ const getWindowDimensions = () => {
   return [ width, height ]
 }
 
-const StickerDesigner = () => {
+const StickerDesigner = ({loadProducts}) => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
   const [designerScale, setDesignerScale] = useState(1);
   const [designerLength, setDesignerLength] = useState(1000);
   const [frames, setFrames] = useState([{image_url: ""}])
   const [frameIndex, setFrameIndex] = useState(0)
-  const [photos, setPhotos] = useState([{image_url: ""}])
+  const [photos, setPhotos] = useState([{image_url: thumper}])
   const [photoIndex, setPhotoIndex] = useState(0)
   const [editType, setEditType] = useState("frame")
   const [photoPosition, setPhotoPosition] = useState([0, 200])
@@ -25,6 +26,7 @@ const StickerDesigner = () => {
   const frameSize = 1000
 
   const genImage = () => {
+    loadProducts()
     api.createComposite(
       photos[photoIndex],
       frames[frameIndex],
@@ -55,7 +57,6 @@ const StickerDesigner = () => {
       setFrames(result.data)
     })
     api.getComponentsByType('photo').then((result) => {
-      console.log(result.data)
       setPhotos(result.data)
     })
 
@@ -183,7 +184,7 @@ const StickerDesigner = () => {
         </div>
       </div>
       <Button onClick={() => genImage()} >
-        Generate
+        Update Stuff
       </Button>
     </div>
   )

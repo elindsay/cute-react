@@ -13,10 +13,7 @@ const GeneratedProduct = () => {
   const { id } = useParams()
 
   useEffect(() => {
-    console.log("going to request")
     api.getGeneratedProduct(id).then((result) => {
-      console.log("request run")
-      console.log(result.data)
       setProduct(result.data)
     })
   }, [])
