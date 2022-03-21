@@ -3,19 +3,25 @@ import React, { useState, useCallback } from 'react'
 import { Button, Form } from 'react-bootstrap'
 
 const AdminComponentEditor = (props) => {
-  const [selectedFile, setSelectedFile] = useState("");
+  const [imageFile, setImageFile] = useState("");
+  const [alphaFile, setAlphaFile] = useState("");
   const [components, setComponents] = useState([]);
   const [componentRun, setComponentRun] = useState("");
   const [componentType, setComponentType] = useState("");
 
-  const setFile = (event) => {
+  const updateImageFile = (event) => {
     event.preventDefault()
-    setSelectedFile(event.target.files[0]);
+    setImageFile(event.target.files[0]);
+  };
+
+  const updateAlphaFile = (event) => {
+    event.preventDefault()
+    setAlphaFile(event.target.files[0]);
   };
 
   const submitComponent = useCallback((event) => {
     event.preventDefault()
-    api.uploadComponent(selectedFile, componentType, componentRun).then((result) => {
+    api.uploadComponent(imageFile, alphaFile, componentType, componentRun).then((result) => {
       setComponents([...components, result.data])
     })
   });
@@ -38,8 +44,12 @@ const AdminComponentEditor = (props) => {
             onChange={(event) => setComponentRun(event.target.value) } />
         </Form.Group>
         <Form.Group controlId="formFile">
-          <Form.Label>Default file input example</Form.Label>
-          <Form.Control type="file" onChange={(event) => setFile(event)} />
+          <Form.Label>Image File</Form.Label>
+          <Form.Control type="file" onChange={(event) => updateImageFile(event)} />
+        </Form.Group>
+        <Form.Group controlId="formFile">
+          <Form.Label>Alpha File</Form.Label>
+          <Form.Control type="file" onChange={(event) => updateAlphaFile(event)} />
         </Form.Group>
         <Button type="submit">Save</Button>
       </Form>

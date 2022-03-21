@@ -96,7 +96,8 @@ const StickerDesigner = ({loadProducts}) => {
 
   const updateFile = (event) => {
     const file = event.target.files[0];
-    api.uploadComponent(file, "user-generated", "user").then((result) => {
+    console.log("about to upload")
+    api.uploadComponent(file, undefined, "user-generated", "user").then((result) => {
       console.log(result.data)
       setPhotos([...photos, result.data])
     })
@@ -184,7 +185,7 @@ const StickerDesigner = ({loadProducts}) => {
         </div>
       </div>
       <Button onClick={() => genImage()} >
-        Update Stuff
+        Preview on Stuff
       </Button>
     </div>
   )
