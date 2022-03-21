@@ -13,6 +13,7 @@ const SocketConnector = (props) => {
   const [product1, setProduct1] = useState({id: "", image_url: ""})
   const [product2, setProduct2] = useState({id: "", image_url: ""})
   const [product3, setProduct3] = useState({id: "", image_url: ""})
+  const [socketId, setSocketId] = useState("")
 
 
 
@@ -20,7 +21,7 @@ const SocketConnector = (props) => {
     //socket.emit('join', 'abcd');
     console.log("setting up")
     socket.on("connect", () => {
-      console.log(socket.id)
+      setSocketId(socket.id)
     })
     console.log(props.defaultProducts)
     if(props.defaultProducts[0]){
@@ -56,7 +57,7 @@ const SocketConnector = (props) => {
 
   return (
     <div>
-      <StickerDesigner loadProducts={loadProducts}/>
+      <StickerDesigner loadProducts={loadProducts} socketId={socketId}/>
       <div>
         <Row>
           <Col sm={12} md={4} className="ProductPreview" key={"product-link-1"}>

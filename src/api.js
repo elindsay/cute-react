@@ -19,12 +19,15 @@ const api = {
     )
     return result
   },
-  createComposite: async (photo, frame, scale, position) => { 
+  createComposite: async (photo, frame, scale, position, socketId) => { 
     const formData = new FormData()
     formData.append("photo_component_id", photo.id)
     formData.append("frame_component_id", frame.id)
     formData.append("photo_position", position)
     formData.append("photo_scale", scale)
+    formData.append("socket_id", socketId)
+    console.log("in api")
+    console.log(socketId)
     await axios.post(baseUrl+'/composites', formData)
   },
   createOrder: async (product_id, frame, scale, position) => { 

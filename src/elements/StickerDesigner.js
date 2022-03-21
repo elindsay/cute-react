@@ -10,7 +10,7 @@ const getWindowDimensions = () => {
   return [ width, height ]
 }
 
-const StickerDesigner = ({loadProducts}) => {
+const StickerDesigner = ({loadProducts, socketId}) => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
   const [designerScale, setDesignerScale] = useState(1);
   const [designerLength, setDesignerLength] = useState(1000);
@@ -27,11 +27,13 @@ const StickerDesigner = ({loadProducts}) => {
 
   const genImage = () => {
     loadProducts()
+    alert(socketId)
     api.createComposite(
       photos[photoIndex],
       frames[frameIndex],
       photoScale,
-      photoPosition
+      photoPosition,
+      socketId
     )
    }
 
@@ -109,10 +111,10 @@ const StickerDesigner = ({loadProducts}) => {
       <div className="editTypeSelector">
         <ToggleButtonGroup type="radio" value={editType} name="editType" onChange={(val) => setEditType(val)}>
           <ToggleButton id="tbg-btn-1" value={"frame"} variant="outline-primary" className="border-2">
-            Select Frame
+            Change Frame
           </ToggleButton>
           <ToggleButton id="tbg-btn-2" value={"photo"}variant="outline-primary" className="border-2">
-             Select Photo
+             Change Photo
           </ToggleButton>
         </ToggleButtonGroup>
         <Button onClick={() => updateComponent(-1)} variant="outline-primary">
