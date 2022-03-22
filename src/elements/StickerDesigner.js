@@ -27,7 +27,6 @@ const StickerDesigner = ({loadProducts, socketId}) => {
 
   const genImage = () => {
     loadProducts()
-    alert(socketId)
     api.createComposite(
       photos[photoIndex],
       frames[frameIndex],
@@ -67,8 +66,26 @@ const StickerDesigner = ({loadProducts, socketId}) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    setPhotoDefaults(photoIndex)
+  }, [photoIndex, photos])
+
+
+  const setPhotoDefaults = (index) => {
+      const x_scale = photos[index].width/frameSize
+      const y_scale = photos[index].height/frameSize
+      console.log(x_scale, y_scale)
+      setPhotoScale(1/Math.min(x_scale, y_scale))
+
+      const new_width =  photos[index].width/x_scale
+      const new_height =  photos[index].height/y_scale
+      const x_offset = (new_width - frameSize)/2
+      const y_offset = (new_height - frameSize)/2
+      setPhotoPosition([x_offset, y_offset])
+  }
 
   const updateComponent = (num) => {
+    let newPhotoIndex = photoIndex;
     if(editType == "frame"){
       if(frameIndex + num < 0){
         setFrameIndex(frames.length - 1)
@@ -77,10 +94,11 @@ const StickerDesigner = ({loadProducts, socketId}) => {
       }
     }else {
       if(photoIndex + num < 0){
-        setPhotoIndex(photos.length - 1)
+        newPhotoIndex = photos.length - 1
       } else {
-        setPhotoIndex((photoIndex + num)%photos.length)
+        newPhotoIndex = (photoIndex + num)%photos.length
       }
+      setPhotoIndex(newPhotoIndex)
     }
   }
 
@@ -141,10 +159,10 @@ const StickerDesigner = ({loadProducts, socketId}) => {
             <Button onClick={() => setX(5)} >
               <FontAwesomeIcon icon={faArrowRight} />
             </Button>
-            <Button onClick={() => setPhotoScale(photoScale + 0.1)} >
+            <Button onClick={() => setPhotoScale(photoScale + photoScale/100)} >
               <FontAwesomeIcon icon={faPlus} />
             </Button>
-            <Button onClick={() => setPhotoScale(photoScale - 0.1)} >
+            <Button onClick={() => setPhotoScale(photoScale - photoScale/100)} >
               <FontAwesomeIcon icon={faMinus} />
             </Button>
             <Button onClick={() => chooseFile()} >
