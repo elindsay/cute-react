@@ -214,4 +214,11 @@ h4 {
       left: 42px;
     }
   }
+  .buffer {
+    position: absolute;
+    height: 5px;
+    width: 100%;
+    top: 0px;
+    background-color: white;
+  }
 }

@@ -216,6 +216,7 @@ const StickerDesigner = ({loadProducts, socketId}) => {
       />
           <img src={frames[frameIndex].image_url} style={{top: '0px', position: 'absolute'}}/>
         </div>
+        <div className="buffer">&nbsp;</div> 
       </div>
       <Button onClick={() => genImage()} >
         Preview on Stuff
