@@ -140,4 +140,78 @@ h4 {
   img.product_page_main_img {
     width: 100%
   }
+  h2, h4 {
+    text-align: left;
+  }
+  .generated-product-data {
+    padding: 10px;
+    margin: 20px 0px;
+    .pp-protect {
+      display: inline-block;
+    }
+    .payment {
+      text-align: center;
+      img {
+        margin: auto;
+      }
+    }
+  }
+  .price {
+    font-weight: bold;
+  }
+  .description {
+    font-size: 18px;
+  }
+}
+
+.StickerDesigner {
+  .editTypeSelector {
+    margin: 10px 10px 0px 20px;
+  }
+  .componentShift {
+    margin: 10px 0px 0px;
+  }
+  .upload {
+    margin: 0px 0px 0px 10px;
+  }
+  .direction {
+    position: relative;
+    height: 80px;
+    margin: 10px 0px 0px 10px;
+    .up {
+      position: absolute;
+      top: 0;
+      left: 52px;
+    }
+    .down {
+      position: absolute;
+      top: 40px;
+      left: 52px;
+     }
+    .left {
+      position: absolute;
+      top: 20px;
+      left: 10px;
+    }
+    .right {
+      position: absolute;
+      top: 20px;
+      left: 94px;
+    }
+  }
+  .scaling {
+    margin: 10px 0px 0px 10px;
+    position: relative;
+    height: 80px;
+    .plus {
+      position: absolute;
+      top: 20px;
+      left: 0px;
+    }
+    .minus {
+      position: absolute;
+      top: 20px;
+      left: 42px;
+    }
+  }
 }

@@ -46,22 +46,27 @@ const GeneratedProduct = () => {
               <img src={product.image_url} className="product_page_main_img" />
             </Col>
             <Col sm={12} md={6}>
-               <h2>Title Placeholder</h2>
-               <h4>{display_price(product.price)}</h4>
-               <i>Free Shipping in the USA!</i>
+              <Row className="generated-product-data">
+                <h2>{product.title}</h2>
+                <h4 className="price">{display_price(product.price)}</h4>
+                <div className="description">{product.description}</div>
+              </Row>
+              <Row className="generated-product-data">
+                <i>Free Shipping in the USA!</i>
+              </Row>
+              <Row className="generated-product-data payment">
+                <img src={thumper} className={loading ? "thumper" : "hidden"}/>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="paypal-paynow-form" className = {loading ? "hidden" : "paypal"}>
+                    <input type="hidden" name="cmd" value="_s-xclick" />
+                    <input type="hidden" name="generated_product_id" value={id} />
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" onClick={submitForm} />
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+                </form>
+              </Row>
+              <Row className="generated-product-data">
+                <span className="pp-protect secondary-link">This purchase qualifies for <a href="https://www.paypal.com/us/webapps/mpp/paypal-safety-and-security">Paypal Protection</a></span>
+              </Row>
             </Col>
-          </Row>
-          <Row>
-            <img src={thumper} className={loading ? "thumper" : "hidden"}/>
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="paypal-paynow-form" className = {loading ? "hidden" : "paypal"}>
-                <input type="hidden" name="cmd" value="_s-xclick" />
-                <input type="hidden" name="generated_product_id" value={id} />
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" onClick={submitForm} />
-                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-            </form>
-          </Row>
-          <Row>
-            Placeholder Description
           </Row>
         </Col>
       </Row>

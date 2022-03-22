@@ -1,7 +1,7 @@
 import api from '../api'
 import thumper from '../assets/thumper-transparent.gif';
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { Button, Form, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
+import { Button, Form, ToggleButton, ToggleButtonGroup, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight, faArrowUp, faArrowDown, faPaw, faVectorSquare, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 
@@ -124,7 +124,7 @@ const StickerDesigner = ({loadProducts, socketId}) => {
   }
 
   return(
-    <div>
+    <div className="StickerDesigner">
       <h4>Design Your Stuff!</h4>
       <div className="editTypeSelector">
         <ToggleButtonGroup type="radio" value={editType} name="editType" onChange={(val) => setEditType(val)}>
@@ -135,41 +135,53 @@ const StickerDesigner = ({loadProducts, socketId}) => {
              Change Photo
           </ToggleButton>
         </ToggleButtonGroup>
-        <Button onClick={() => updateComponent(-1)} variant="outline-primary">
-          <FontAwesomeIcon icon={faArrowLeft} />
-          <FontAwesomeIcon icon={editType == "frame" ?  faVectorSquare : faPaw} />
-        </Button>
-        <Button onClick={() => updateComponent(1)} variant="outline-primary">
-          <FontAwesomeIcon icon={editType == "frame" ?  faVectorSquare : faPaw} />
-          <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
+        <div className="componentShift">
+          <Button onClick={() => updateComponent(-1)} variant="outline-primary">
+            <FontAwesomeIcon icon={faArrowLeft} />
+            <FontAwesomeIcon icon={editType == "frame" ?  faVectorSquare : faPaw} />
+          </Button>
+          <Button onClick={() => updateComponent(1)} variant="outline-primary">
+            <FontAwesomeIcon icon={editType == "frame" ?  faVectorSquare : faPaw} />
+            <FontAwesomeIcon icon={faArrowRight} />
+          </Button>
+          { editType == "photo" && (
+            <Button onClick={() => chooseFile()} className="upload" variant="outline-primary">
+              Upload New
+            </Button>
+          )}
+        </div>
       </div>
       <div className="subeditTypeSelector">
         { editType == "photo" && (
-          <div>
-            <Button onClick={() => setY(-5)} >
-              <FontAwesomeIcon icon={faArrowUp} />
-            </Button>
-            <Button onClick={() => setY(5)} >
-              <FontAwesomeIcon icon={faArrowDown} />
-            </Button>
-            <Button onClick={() => setX(-5)} >
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </Button>
-            <Button onClick={() => setX(5)} >
-              <FontAwesomeIcon icon={faArrowRight} />
-            </Button>
-            <Button onClick={() => setPhotoScale(photoScale + photoScale/100)} >
-              <FontAwesomeIcon icon={faPlus} />
-            </Button>
-            <Button onClick={() => setPhotoScale(photoScale - photoScale/100)} >
-              <FontAwesomeIcon icon={faMinus} />
-            </Button>
-            <Button onClick={() => chooseFile()} >
-              Upload
-            </Button>
-            <input type='file' id='file' ref={inputFile} style={{display: 'none'}} onChange={(event) => updateFile(event)}/>
-          </div>
+          <Row>
+            <Col xs={5}>
+              <div className = "direction">
+                <Button onClick={() => setY(-5)} className="up">
+                  <FontAwesomeIcon icon={faArrowUp} />
+                </Button>
+                <Button onClick={() => setY(5)} className="down">
+                  <FontAwesomeIcon icon={faArrowDown} />
+                </Button>
+                <Button onClick={() => setX(-5)} className="left">
+                  <FontAwesomeIcon icon={faArrowLeft} />
+                </Button>
+                <Button onClick={() => setX(5)} className="right">
+                  <FontAwesomeIcon icon={faArrowRight} />
+                </Button>
+              </div>
+            </Col>
+            <Col xs={5}>
+              <div className = "scaling">
+                <Button onClick={() => setPhotoScale(photoScale + photoScale/100)} className="plus">
+                  <FontAwesomeIcon icon={faPlus} />
+                </Button>
+                <Button onClick={() => setPhotoScale(photoScale - photoScale/100)} className="minus">
+                  <FontAwesomeIcon icon={faMinus} />
+                </Button>
+                <input type='file' id='file' ref={inputFile} style={{display: 'none'}} onChange={(event) => updateFile(event)}/>
+              </div>
+            </Col>
+          </Row>
         )}
       </div>
       <div className="designer" 
