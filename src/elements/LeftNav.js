@@ -11,8 +11,8 @@ const LeftNav = () => {
       <Nav defaultActiveKey="/home" id="Left-nav" className="flex-column Left-nav Lg-only">
         <Nav.Link className="Menu-item" href="/">Home</Nav.Link>
         <Nav.Link className="Menu-item" href="/">Design</Nav.Link>
-        <Nav.Link className="Menu-item" href="">About Us</Nav.Link>
-        <Nav.Link className="Menu-item" href="https://cuteanimalstuff.shop/pages/contact">Contact</Nav.Link>
+        <Nav.Link className="Menu-item" href="/about">About Us</Nav.Link>
+        <Nav.Link className="Menu-item" href="/contact">Contact</Nav.Link>
       </Nav>
     </Col>
   )

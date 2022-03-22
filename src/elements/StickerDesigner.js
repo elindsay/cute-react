@@ -118,8 +118,9 @@ const StickerDesigner = ({loadProducts, socketId}) => {
     const file = event.target.files[0];
     console.log("about to upload")
     api.uploadComponent(file, undefined, "user-generated", "user").then((result) => {
-      console.log(result.data)
+      const old_length = photos.length
       setPhotos([...photos, result.data])
+      setPhotoIndex(old_length)
     })
   }
 
