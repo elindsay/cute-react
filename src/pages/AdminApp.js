@@ -2,6 +2,7 @@ import api from '../api'
 import React, { useState, useEffect, useCallback } from 'react'
 import { ToggleButton, Table} from 'react-bootstrap'
 import AdminComponentEditor from '../elements/AdminComponentEditor'
+import ReactGA from 'react-ga';
 
 const fileTypes = ["PNG"];
 
@@ -10,6 +11,7 @@ const AdminApp = () => {
   const [components, setComponents] = useState([])
   
   useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
     api.getComponents().then((result) => {
       setComponents(result.data)
     })

@@ -1,8 +1,14 @@
 import { Row, Col } from 'react-bootstrap';
+import React, { useEffect } from 'react'
 import TopNav from '../elements/TopNav';
 import LeftNav from '../elements/LeftNav';
+import ReactGA from 'react-ga';
 
 const Contact = () => {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, [])
   
   return(
     <div className="ContentContainer Contact">
