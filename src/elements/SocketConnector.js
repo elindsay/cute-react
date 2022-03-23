@@ -31,7 +31,7 @@ const SocketConnector = (props) => {
       setProduct2(props.defaultProducts[1])
     }
     if(props.defaultProducts[2]){
-      setProduct2(props.defaultProducts[2])
+      setProduct3(props.defaultProducts[2])
     }
     getProducts();
   }, [props]);
