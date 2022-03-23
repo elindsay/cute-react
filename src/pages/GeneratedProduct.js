@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import TopNav from '../elements/TopNav';
 import LeftNav from '../elements/LeftNav';
 import { useParams } from "react-router-dom";
-import ReactGA from 'react-ga';
 
 const GeneratedProduct = () => {
   const [product, setProduct] = useState({price: 0, paypal_checkout_id: ""})
@@ -14,7 +13,6 @@ const GeneratedProduct = () => {
   const { id } = useParams()
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
     api.getGeneratedProduct(id).then((result) => {
       setProduct(result.data)
     })

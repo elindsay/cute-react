@@ -5,13 +5,11 @@ import TopNav from '../elements/TopNav';
 import LeftNav from '../elements/LeftNav';
 //import StickerDesigner from '../elements/StickerDesigner';
 import SocketConnector from '../elements/SocketConnector';
-import ReactGA from 'react-ga';
 
 const DesignerApp = () => {
   const [defaultProducts, setDefaultProducts] = useState([]);
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
     api.getResaleComposites().then((result) => {
       console.log(result.data)
       setDefaultProducts(result.data[0].generated_products)

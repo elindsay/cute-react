@@ -5,9 +5,6 @@ import DesignerApp from './pages/DesignerApp';
 import GeneratedProduct from './pages/GeneratedProduct';
 import Contact from './pages/Contact';
 import AboutUs from './pages/AboutUs';
-import ReactGA from 'react-ga';
-
-ReactGA.initialize('G-KKEN7J56ZT')
 
 function App() {
 
