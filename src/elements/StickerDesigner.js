@@ -218,7 +218,7 @@ const StickerDesigner = ({loadProducts, socketId}) => {
         </div>
         <div className="buffer">&nbsp;</div> 
       </div>
-      <Button onClick={() => genImage()} >
+      <Button onClick={() => genImage()} style={{marginLeft: '20px'}}>
         Preview on Stuff
       </Button>
     </div>
