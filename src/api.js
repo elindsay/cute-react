@@ -6,6 +6,7 @@ const api = {
   getComponents: async () => await axios.get(baseUrl+'/components'),
   getComponentsByType: async (type) => await axios.get(baseUrl+'/components?component_type='+type),
   getGeneratedProduct: async (product_id) => await axios.get(baseUrl+'/generated_products/'+product_id),
+  getComposite: async (id) => await axios.get(baseUrl+'/composites/'+id),
   getResaleComposites: async () => await axios.get(baseUrl+'/composites?for_resale=true'),
   uploadComponent: async (imageFile, alphaFile, type, run) => {
     const formData = new FormData()

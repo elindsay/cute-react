@@ -218,8 +218,14 @@ const StickerDesigner = ({loadProducts, socketId}) => {
         </div>
         <div className="buffer">&nbsp;</div> 
       </div>
-      <Button onClick={() => genImage()} style={{marginLeft: '20px'}}>
-        Preview on Stuff
+      <Button href="/" style={{marginLeft: '20px'}} variant="outline-primary">
+        Save Design
+      </Button>
+      <Button onClick={() => genImage()} style={{marginLeft: '20px'}} variant="outline-primary">
+        Preview Below
+      </Button>
+      <Button href="/" style={{marginLeft: '20px'}} variant="outline-primary">
+        Share 
       </Button>
     </div>
   )
